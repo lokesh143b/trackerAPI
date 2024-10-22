@@ -3,8 +3,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const sequelize = require('./config/database');
-const userRoutes = require('./routes/user');
-const appointmentRoutes = require('./routes/appointment');
+const transactionRoutes = require('./routes/transactions');
+const categoryRoutes = require('./routes/categories');
 
 const app = express();
 app.use(bodyParser.json());
@@ -16,8 +16,9 @@ sequelize.sync()
     console.log('Database & tables created!');
   });
 
-app.use('/api', userRoutes);
-app.use('/api', appointmentRoutes);
+// Routes
+app.use('/transactions', transactionRoutes);
+app.use('/categories', categoryRoutes);
 
 const port = process.env.PORT || 3001;
 app.listen(port, () => {
